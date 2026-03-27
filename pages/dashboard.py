@@ -53,6 +53,19 @@ if "category" in view.columns:
 else:
     st.info("No categories available. Upload a file to generate categories.")
 
+# PARENT CATEGORY CHART -------------------------------------------------
+st.subheader("🏷️ Spending by Parent Category")
+
+if "parent" in view.columns:
+    parent_totals = (
+        view.groupby("parent")["amount_abs"]
+        .sum()
+        .sort_values(ascending=False)
+    )
+    st.bar_chart(parent_totals)
+else:
+    st.info("No parent category data available.")
+
 # CATEGORY PIE CHART -----------------------------------------
 st.subheader("🥧 Category Distribution (Spending)")
 
