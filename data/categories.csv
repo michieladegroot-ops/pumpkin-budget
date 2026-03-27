@@ -1,6 +1,6 @@
-keyword,category
-etos,personal_care
-korenmolen,supermarket
-zilverenkruis,insurance
-pwn,utilities
-huiskamer,restaurants
+keyword,category,parent
+etos,personal_care,health_and_beauty
+korenmolen,supermarket,groceries
+zilverenkruis,insurance,insurance
+pwn,utilities,home_and_energy
+huiskamer,restaurants,food_and_drink
