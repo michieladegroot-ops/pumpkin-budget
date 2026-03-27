@@ -1,73 +1,76 @@
 import pandas as pd
+import re
 
-# Clean imported bank data and unify the schema
-# Detects date, amount, description columns by common patterns, and returns a DataFrame with canonical fields.
+def extract_merchant_key(description: str) -> str:
+    """
+    Extract clean, stable merchant key using the SAME rules
+    used to generate master_categories_new.csv.
+    """
+
+    text = str(description).lower()
+
+    # 1. Google Pay pattern
+    if "google pay" in text:
+        after = text.split("google pay", 1)[1]
+        after = after.split(",", 1)[0].strip()
+        cleaned = re.sub(r"[^a-z0-9 &]", " ", after)
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        if cleaned:
+            return cleaned
+
+    # 2. /NAME/ pattern
+    if "/name/" in text:
+        after = text.split("/name/", 1)[1].split("/", 1)[0].strip()
+        cleaned = re.sub(r"[^a-z0-9 &]", " ", after)
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        if cleaned:
+            return cleaned
+
+    # 3. fallback — cleaned full description
+    cleaned = re.sub(r"[^a-z0-9 &]", " ", text)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned
+
 
 def clean_bank_data(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
-    # Normalize column names
+    # normalize headers
     df.columns = (
-        df.columns
-        .astype(str)
-        .str.strip()
+        df.columns.astype(str)
         .str.lower()
+        .str.strip()
         .str.replace(" ", "_")
         .str.replace("-", "_")
     )
 
-    # --- DATE HANDLING (critical fix!) --------------------------------
-    # Prefer transactiondate because ABN exports use YYYYMMDD as integer
+    # date parsing
     if "transactiondate" in df.columns:
         df["date"] = pd.to_datetime(
             df["transactiondate"].astype(str),
             format="%Y%m%d",
-            errors="coerce"
+            errors="coerce",
         )
-    # fallback to valuedate if needed
     elif "valuedate" in df.columns:
         df["date"] = pd.to_datetime(
             df["valuedate"].astype(str),
             format="%Y%m%d",
-            errors="coerce"
+            errors="coerce",
         )
-    else:
-        # final fallback: any column containing "date"
-        date_candidates = [c for c in df.columns if "date" in c or "datum" in c]
-        if not date_candidates:
-            raise ValueError("No date column found in uploaded file.")
-        date_col = date_candidates[0]
-
-        # Try parsing with YYYYMMDD format first
-        df["date"] = pd.to_datetime(
-            df[date_col].astype(str),
-            format="%Y%m%d",
-            errors="coerce"
-        )
-
-    # Remove unparseable dates
     df = df[df["date"].notna()].reset_index(drop=True)
 
-    # --- AMOUNT --------------------------------------------------------
-    amount_candidates = [c for c in df.columns if "amount" in c or "bedrag" in c]
-    if not amount_candidates:
-        raise ValueError("No amount column found in uploaded file.")
-    amount_col = amount_candidates[0]
-
-    df["amount"] = pd.to_numeric(df[amount_col], errors="coerce")
+    # amounts
+    if "amount" in df.columns:
+        df["amount"] = pd.to_numeric(df["amount"], errors="coerce")
     df["amount_abs"] = df["amount"].abs()
 
-    # --- DESCRIPTION ---------------------------------------------------
-    desc_candidates = [
-        c for c in df.columns 
-        if "description" in c or "omschrijving" in c or "name" in c
-    ]
-    if desc_candidates:
-        df["description"] = df[desc_candidates[0]].astype(str).str.strip()
-    else:
-        df["description"] = ""
+    # description
+    df["description"] = df["description"].astype(str).fillna("")
 
-    # --- TIME FIELDS ---------------------------------------------------
+    # NEW: merchant key extraction
+    df["merchant_key"] = df["description"].apply(extract_merchant_key)
+
+    # time fields
     df["year"] = df["date"].dt.year
     df["month_id"] = df["date"].dt.strftime("%Y-%m")
     df["month_label"] = df["date"].dt.strftime("%b %Y")
