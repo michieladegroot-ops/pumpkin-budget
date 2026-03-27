@@ -1,6 +1,32 @@
 keyword,category,parent
-etos,personal_care,health_and_beauty
+albert,supermarket,groceries
+bond en,supermarket,groceries
 korenmolen,supermarket,groceries
-zilverenkruis,insurance,insurance
-pwn,utilities,home_and_energy
-huiskamer,restaurants,food_and_drink
+
+cor,bakery,groceries
+donk,butcher,groceries
+pronk,cheese,groceries
+petit clos,wine,groceries
+
+rataplan,second_hand,shopping
+bol.com,online_shopping,shopping
+hema,hema,shopping
+kruidvat,kruidvat,shopping
+loco,laundry,shopping
+
+warmtethuis,house,home_and_energy
+karwei,house,home_and_energy
+ikea,house,home_and_energy
+etos,house,home_and_energy
+vattenfall,energy,home_and_energy
+ziggo,internet,home_and_energy
+
+anwb,insurance,insurance
+verzekering,insurance,insurance
+kruis,insurance,insurance
+
+kinderopvang,subsidy,family
+kidswereld,daycare,family
+hypotheek,mortgage,fixed_costs
+yoga,yoga,personal_care
+nelis,horeca,food_and_drink
