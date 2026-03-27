@@ -1,5 +1,4 @@
 keyword,category,parent
-# --- Groceries ---
 albert,supermarket,groceries
 heijn,supermarket,groceries
 bond en,supermarket,groceries
@@ -12,22 +11,33 @@ pronk,cheese,groceries
 slager,meat,groceries
 donk,meat,groceries
 bram van diermen,fish,groceries
+boz versmarkt,supermarket,groceries
+groente,vegetables,groceries
+aardappelhandel nick,vegetables,groceries
 
-# --- Shopping & personal items ---
 wibra,discount_store,shopping
 kruidvat,drugstore,shopping
 etos,drugstore,shopping
 cb drogist,drugstore,shopping
+c&b drogist weesp,drugstore,shopping
 hema,department_store,shopping
 rataplan,second_hand,shopping
 barbier,personal_care,shopping
 primera,newsagent,shopping
 marktplaats,marketplace,shopping
-was strijk en stoomservice loco,laundry,shopping
+was strijk en stoomservice,laundry,shopping
+loco,laundry,shopping
+enorm,discount_store,shopping
+enorm van driel,discount_store,shopping
 zalando,fashion,shopping
 bolcom,online_shopping,shopping
+amazon eu sarl,online_shopping,shopping
+venteuniquecom,furniture,home_and_energy
+wij geboortekaartjes via multisafepay,gifts,shopping
 
-# --- Restaurants & cafés ---
+yogatoday vof via stichting mollie payments,fitness,health_and_beauty
+parkbee bv,parking,travel
+
 bistro,restaurants,food_and_drink
 frans,restaurants,food_and_drink
 huiskamer,restaurants,food_and_drink
@@ -37,8 +47,12 @@ ijssalon,ice_cream,food_and_drink
 pret a manger,restaurants,food_and_drink
 stach,cafe,food_and_drink
 waterloo,restaurants,food_and_drink
+grill bar de mazzel,restaurants,food_and_drink
+proef zeeland,restaurants,food_and_drink
+vermaat oba,catering,food_and_drink
 
-# --- Utilities & Housing ---
+sumup happy toilets,services,other
+
 warmtethuis,home,home_and_energy
 karwei,hardware,home_and_energy
 ikea,home,home_and_energy
@@ -46,36 +60,53 @@ vattenfall,energy,home_and_energy
 pwn,utilities,home_and_energy
 ziggo,internet,home_and_energy
 
-# --- Insurance & financial ---
 zilver,insurance,insurance
 zilveren,insurance,insurance
 nationalened schadeverz mijnv,insurance,insurance
 nationale nederlanden,insurance,insurance
+nationale ned schadeverz mijnv,insurance,insurance
 anwb,insurance,insurance
+
 hypotheek,mortgage,fixed_costs
+
 abn amro,bank,financial
 rabobank,bank,financial
 ideal,payment,financial
 ccv,payment,financial
 belastingdienst,tax,government
 sociale verzekeringsbank,government,government
+bcknsautomaat,atm,financial
+bck nsautomaat,atm,financial
 
-# --- Services & personal / misc ---
 m a de groot,services,other
 annalisa noack,services,other
 infomedics,medical_services,health_and_beauty
 medipoint,pharmacy,health_and_beauty
 tiny library,donation,entertainment
 grote clubactie,charity,other
+mevrou co,services,other
+mevrou  co,services,other
+online payment stichting,payment,financial
+veldheer via tikkie,services,other
+nlov8r5lql6le6rjm6,other,other
+bck apotheek veldsema,pharmacy,health_and_beauty
+bckapotheek veldsema,pharmacy,health_and_beauty
+apotheek veldsema,pharmacy,health_and_beauty
 
-# --- Family & childcare ---
 kinderopvang,childcare,family
 kidswereld,daycare,family
 kidskonnect,childcare,family
 
-# --- Travel & transport ---
 klm,airline,travel
 tfl,transport,travel
 ns groep,transport,travel
 ns reizigers,transport,travel
 deltapark,leisure,travel
+travelodge,hotels,travel
+landal greenparks bv,leisure,travel
+stibmivb,transport,travel
+
+rossmann,drugstore,shopping
+gall & gall,liquor_store,shopping
+harmsen restaurant,restaurants,food_and_drink
+aand vlva,other,other
