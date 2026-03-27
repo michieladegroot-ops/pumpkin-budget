@@ -1,32 +1,64 @@
 keyword,category,parent
+# --- Groceries ---
 albert,supermarket,groceries
+heijn,supermarket,groceries
 bond en,supermarket,groceries
 korenmolen,supermarket,groceries
-
+spar,supermarket,groceries
+bakkerij,bakery,groceries
 cor,bakery,groceries
-donk,butcher,groceries
 pronk,cheese,groceries
-petit clos,wine,groceries
+slager,meat,groceries
+donk,meat,groceries
+bram van diermen,fish,groceries
 
+# --- Shopping & personal items ---
+wibra,discount_store,shopping
+wibra weesp,discount_store,shopping
+kruidvat,drugstore,shopping
+etos,drugstore,shopping
+cb drogist,drugstore,shopping
+hema,department_store,shopping
+nelis,ice_cream,food_and_drink
+ijssalon,ice_cream,food_and_drink
 rataplan,second_hand,shopping
-bol.com,online_shopping,shopping
-hema,hema,shopping
-kruidvat,kruidvat,shopping
-loco,laundry,shopping
+barbier,personal_care,shopping
 
-warmtethuis,house,home_and_energy
-karwei,house,home_and_energy
-ikea,house,home_and_energy
-etos,house,home_and_energy
+# --- Restaurants & cafés ---
+bistro,restaurants,food_and_drink
+frans,restaurants,food_and_drink
+huiskamer,restaurants,food_and_drink
+scherpplaats,cafe,food_and_drink
+waterloo,restaurants,food_and_drink
+pret a manger,restaurants,food_and_drink
+stach,cafe,food_and_drink
+
+# --- Utilities & Housing ---
+warmtethuis,home,home_and_energy
+karwei,hardware,home_and_energy
+ikea,home,home_and_energy
 vattenfall,energy,home_and_energy
+pwn,utilities,home_and_energy
 ziggo,internet,home_and_energy
 
+# --- Insurance & Financial ---
+zilver,insurance,insurance
+zilveren,insurance,insurance
+nationale nederlanden,insurance,insurance
 anwb,insurance,insurance
-verzekering,insurance,insurance
-kruis,insurance,insurance
-
-kinderopvang,subsidy,family
-kidswereld,daycare,family
 hypotheek,mortgage,fixed_costs
+abn amro,bank,financial
+rabobank,bank,financial
+ideal,payment,financial
+ccv,payment,financial
+
+# --- Travel & Transport ---
+travelodge,hotels,travel
+tfl,transport,travel
+ns groep,transport,travel
+ns reizigers,transport,travel
+
+# --- Family & wellbeing ---
+kinderopvang,childcare,family
+kidswereld,daycare,family
 yoga,yoga,personal_care
-nelis,horeca,food_and_drink
