@@ -17,19 +17,21 @@ st.subheader("➕ Add New Mapping")
 
 new_keyword = st.text_input("Keyword (text to search for in description)")
 new_category = st.text_input("Category name")
+new_parent = st.text_input("Parent category")
 
 if st.button("Add mapping"):
-    if new_keyword.strip() == "" or new_category.strip() == "":
-        st.error("Both keyword and category must be filled in.")
+    if not new_keyword.strip() or not new_category.strip():
+        st.error("Keyword and category are required.")
     else:
-        # Append row
         new_row = {
             "keyword": new_keyword.lower().strip(),
-            "category": new_category.lower().strip()
+            "category": new_category.lower().strip(),
+            "parent": new_parent.lower().strip() if new_parent else "other"
         }
         cat_df = pd.concat([cat_df, pd.DataFrame([new_row])], ignore_index=True)
         cat_df.to_csv("data/categories.csv", index=False)
         st.success("Mapping added. Refresh the page to see it.")
+
 
 st.write("---")
 
