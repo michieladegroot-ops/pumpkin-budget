@@ -5,6 +5,7 @@ heijn,supermarket,groceries
 bond en,supermarket,groceries
 korenmolen,supermarket,groceries
 spar,supermarket,groceries
+vomar,supermarket,groceries
 bakkerij,bakery,groceries
 cor,bakery,groceries
 pronk,cheese,groceries
@@ -14,24 +15,28 @@ bram van diermen,fish,groceries
 
 # --- Shopping & personal items ---
 wibra,discount_store,shopping
-wibra weesp,discount_store,shopping
 kruidvat,drugstore,shopping
 etos,drugstore,shopping
 cb drogist,drugstore,shopping
 hema,department_store,shopping
-nelis,ice_cream,food_and_drink
-ijssalon,ice_cream,food_and_drink
 rataplan,second_hand,shopping
 barbier,personal_care,shopping
+primera,newsagent,shopping
+marktplaats,marketplace,shopping
+was strijk en stoomservice loco,laundry,shopping
+zalando,fashion,shopping
+bolcom,online_shopping,shopping
 
 # --- Restaurants & cafés ---
 bistro,restaurants,food_and_drink
 frans,restaurants,food_and_drink
 huiskamer,restaurants,food_and_drink
 scherpplaats,cafe,food_and_drink
-waterloo,restaurants,food_and_drink
+nelis,ice_cream,food_and_drink
+ijssalon,ice_cream,food_and_drink
 pret a manger,restaurants,food_and_drink
 stach,cafe,food_and_drink
+waterloo,restaurants,food_and_drink
 
 # --- Utilities & Housing ---
 warmtethuis,home,home_and_energy
@@ -41,9 +46,10 @@ vattenfall,energy,home_and_energy
 pwn,utilities,home_and_energy
 ziggo,internet,home_and_energy
 
-# --- Insurance & Financial ---
+# --- Insurance & financial ---
 zilver,insurance,insurance
 zilveren,insurance,insurance
+nationalened schadeverz mijnv,insurance,insurance
 nationale nederlanden,insurance,insurance
 anwb,insurance,insurance
 hypotheek,mortgage,fixed_costs
@@ -51,14 +57,25 @@ abn amro,bank,financial
 rabobank,bank,financial
 ideal,payment,financial
 ccv,payment,financial
+belastingdienst,tax,government
+sociale verzekeringsbank,government,government
 
-# --- Travel & Transport ---
-travelodge,hotels,travel
+# --- Services & personal / misc ---
+m a de groot,services,other
+annalisa noack,services,other
+infomedics,medical_services,health_and_beauty
+medipoint,pharmacy,health_and_beauty
+tiny library,donation,entertainment
+grote clubactie,charity,other
+
+# --- Family & childcare ---
+kinderopvang,childcare,family
+kidswereld,daycare,family
+kidskonnect,childcare,family
+
+# --- Travel & transport ---
+klm,airline,travel
 tfl,transport,travel
 ns groep,transport,travel
 ns reizigers,transport,travel
-
-# --- Family & wellbeing ---
-kinderopvang,childcare,family
-kidswereld,daycare,family
-yoga,yoga,personal_care
+deltapark,leisure,travel
