@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from utils.storage import get_transactions
 
-st.title('📊 Dashboard')
+st.title("📊 Dashboard")
 
 df = get_transactions()
 if df is None or df.empty:
@@ -14,7 +14,9 @@ if not pd.api.types.is_datetime64_any_dtype(df["date"]):
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
     df = df[df["date"].notna()]
 
-# Build month list
+# -----------------------------
+# MONTH SELECTION
+# -----------------------------
 month_table = (
     df[["month_id", "month_label"]]
     .drop_duplicates()
@@ -27,10 +29,14 @@ sel = st.selectbox("Select month", month_options, index=0)
 if sel == "All months":
     view = df.copy()
 else:
-    mid = month_table.loc[month_table["month_label"] == sel, "month_id"].iloc[0]
+    mid = month_table.loc[
+        month_table["month_label"] == sel, "month_id"
+    ].iloc[0]
     view = df[df["month_id"] == mid]
 
-# SUMMARY -----------------------------------------------------
+# -----------------------------
+# SUMMARY METRICS
+# -----------------------------
 total_expense = view[view["amount"] < 0]["amount"].sum()
 total_income  = view[view["amount"] > 0]["amount"].sum()
 net = total_income + total_expense
@@ -40,51 +46,61 @@ col1.metric("Total Expenses", f"€ {abs(total_expense):,.2f}")
 col2.metric("Total Income", f"€ {total_income:,.2f}")
 col3.metric("Net", f"€ {net:,.2f}")
 
-# CATEGORY BAR CHART -----------------------------------------
+# -----------------------------
+# SPENDING BY CATEGORY (EXPENSES ONLY)
+# -----------------------------
 st.subheader("📦 Spending by Category")
 
 if "category" in view.columns:
     cat_totals = (
-        view.groupby("category")["amount_abs"]
+        view[view["amount"] < 0]
+        .groupby("category")["amount"]
         .sum()
+        .abs()
         .sort_values(ascending=False)
     )
     st.bar_chart(cat_totals)
 else:
-    st.info("No categories available. Upload a file to generate categories.")
+    st.info("No category data available.")
 
-# PARENT CATEGORY CHART -------------------------------------------------
+# -----------------------------
+# SPENDING BY PARENT CATEGORY (EXPENSES ONLY)
+# -----------------------------
 st.subheader("🏷️ Spending by Parent Category")
 
 if "parent" in view.columns:
     parent_totals = (
-        view.groupby("parent")["amount_abs"]
+        view[view["amount"] < 0]
+        .groupby("parent")["amount"]
         .sum()
+        .abs()
         .sort_values(ascending=False)
     )
     st.bar_chart(parent_totals)
 else:
     st.info("No parent category data available.")
 
-# CATEGORY PIE CHART -----------------------------------------
+# -----------------------------
+# CATEGORY TABLE (EXPENSES ONLY)
+# -----------------------------
 st.subheader("🥧 Category Distribution (Spending)")
 
-if "category" in view.columns and not view.empty:
+if "category" in view.columns:
     pie_data = (
         view[view["amount"] < 0]
-        .groupby("category")["amount_abs"]
+        .groupby("category")["amount"]
         .sum()
-        .reset_index()
+        .abs()
+        .sort_values(ascending=False)
     )
-
-    # Streamlit's built-in pie chart alternative:
-    st.dataframe(pie_data.set_index("category"))
-    st.caption("(*Pie chart libraries require Plotly or Altair — can add later if you want.*)")
+    st.dataframe(pie_data)
 else:
     st.info("No category data to show.")
 
-# TREND LINE --------------------------------------------------
-st.subheader("📈 Spending Trend Over Time (All Months)")
+# -----------------------------
+# TREND OVER TIME (ALL MONTHS)
+# -----------------------------
+st.subheader("📈 Net Cashflow Over Time (All Months)")
 
 trend = (
     df.groupby("month_label")["amount"]
@@ -95,7 +111,9 @@ trend = (
 
 st.line_chart(trend)
 
-# INCOME VS EXPENSES -----------------------------------------
+# -----------------------------
+# INCOME VS EXPENSES OVER TIME (ALL MONTHS)
+# -----------------------------
 st.subheader("💶 Income vs Expenses Over Time")
 
 trend_income = (
@@ -110,6 +128,7 @@ trend_expense = (
     df[df["amount"] < 0]
     .groupby("month_label")["amount"]
     .sum()
+    .abs()
     .reindex(month_table["month_label"])
     .fillna(0)
 )
@@ -117,10 +136,12 @@ trend_expense = (
 st.area_chart(
     pd.DataFrame({
         "Income": trend_income,
-        "Expenses": trend_expense.abs()
+        "Expenses": trend_expense
     })
 )
 
-# TRANSACTION TABLE -------------------------------------------
+# -----------------------------
+# TRANSACTION TABLE
+# -----------------------------
 st.subheader("📄 Transactions")
 st.dataframe(view)
