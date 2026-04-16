@@ -38,24 +38,28 @@ months = (
     cat_df[["month_id", "month_label"]]
     .drop_duplicates()
     .sort_values("month_id")
+    .reset_index(drop=True)
 )
 
 month_labels = months["month_label"].tolist()
-selected_month = st.selectbox("Select month", month_labels, index=len(month_labels)-1)
+selected_month = st.selectbox(
+    "Select month",
+    month_labels,
+    index=len(month_labels) - 1
+)
 
-current_month_id = months.loc[
-    months["month_label"] == selected_month,
-    "month_id"
-].iloc[0]
+current_pos = months.index[
+    months["month_label"] == selected_month
+][0]
 
-prev_idx = months.index[months["month_id"] == current_month_id][0] - 1
-
-if prev_idx < months.index.min():
+if current_pos == 0:
     st.info("No previous month available for comparison.")
     st.stop()
 
-prev_month_id = months.loc[prev_idx, "month_id"]
-prev_month_label = months.loc[prev_idx, "month_label"]
+current_month_id = months.loc[current_pos, "month_id"]
+prev_month_id = months.loc[current_pos - 1, "month_id"]
+prev_month_label = months.loc[current_pos - 1, "month_label"]
+
 
 # -------------------------------------------------
 # AGGREGATION
